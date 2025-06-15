@@ -1,21 +1,21 @@
-package com.example.demo;
+package com.project.homer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping; // New import
+import org.springframework.web.bind.annotation.RestController; // New impor
 
-@RestController
+@RestController 
 @SpringBootApplication
-public class DemoApplication {
+public class HomerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(HomerApplication.class, args);
 	}
 
-    // New method to handle web requests
+	// New method to handle web requests
     @GetMapping("/") // Maps HTTP GET requests to the root URL ("/")
     public String hello() {
-        return "Hello 😎, My Love!";
+        return "Hello, hehe :)";
     }
 }
