@@ -1,6 +1,6 @@
 Primero crear la base de datos con la query en "creacion_hotel.sql"
 -- Meter datos en el orden sugerido
-NOTA: Tener los archivos.csv en una carpeta con permisos (la carpeta C:)
+NOTA: Tener los archivos .csv en una carpeta con permisos (la carpeta C:)
 1. Personas
 COPY persona(cedula,nombres,apellidos,direccion,telefono,email) FROM '/persona.csv' DELIMITER ',' CSV HEADER;
 
