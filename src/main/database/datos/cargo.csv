@@ -1,0 +1,12 @@
+idCargo,nombreC,descripcionC,idArea
+1,Recepcionista,Encargado de atender huéspedes en recepción,1
+2,Gerente de Recepción,Supervisor del área de recepción,1
+3,Camarera,Encargada de limpieza de habitaciones,2
+4,Supervisor Housekeeping,Supervisor del área de limpieza,2
+5,Mesero,Encargado de atención en restaurante,3
+6,Chef,Jefe de cocina del restaurante,3
+7,Técnico Mantenimiento,Encargado de reparaciones técnicas,4
+8,Administrador,Encargado de gestión administrativa,5
+9,Contador,Responsable de la contabilidad del hotel,5
+10,Guardia de Seguridad,Encargado de la seguridad nocturna,6
+11,Masajista,Especialista en masajes terapéuticos,7

@@ -1,0 +1,13 @@
+idServicio,detalles,nombre,costo
+1,"Desayuno continental con frutas, cereales, pan tostado y bebidas calientes",Desayuno Continental,25000
+2,"Almuerzo ejecutivo con entrada, plato fuerte, postre y bebida",Almuerzo Ejecutivo,35000
+3,"Cena gourmet de tres tiempos con maridaje de vinos",Cena Gourmet,65000
+4,"Servicio de lavandería express entrega en 4 horas",Lavandería Express,15000
+5,"Masaje relajante de cuerpo completo 60 minutos",Masaje Corporal,120000
+6,"Transporte privado al aeropuerto El Dorado",Transporte Aeropuerto,45000
+7,"Servicio a la habitación disponible 24 horas",Room Service,8000
+8,"Acceso completo a gimnasio y piscina por día",Gimnasio y Piscina,20000
+9,"Llamadas nacionales e internacionales desde habitación",Servicio Telefónico,5000
+10,"Internet WiFi premium alta velocidad",WiFi Premium,12000
+11,"Minibar completo con snacks y bebidas",Minibar,30000
+12,"Servicio de planchado de ropa",Planchado,10000

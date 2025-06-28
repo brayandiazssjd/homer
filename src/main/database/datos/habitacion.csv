@@ -1,0 +1,16 @@
+noHabitacion,categoria,precionoche,estado
+101,sencilla,150000,no disponible
+102,sencilla,150000,disponible
+103,sencilla,150000,mantenimiento
+104,doble,250000,no disponible
+105,doble,250000,no disponible
+201,sencilla,160000,no disponible
+202,doble,260000,mantenimiento
+203,doble,260000,disponible
+204,suite,450000,no disponible
+205,suite,450000,no disponible
+301,doble,270000,no disponible
+302,suite,480000,no disponible
+303,suite,480000,disponible
+304,suite,500000,no disponible
+305,suite,500000,no disponible
