@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diccionario de Datos - Sistema Hotelero</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .controls {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+        .content {
+            padding: 30px;
+        }
+        .table-section {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #007bff;
+        }
+        .table-title {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .table-description {
+            color: #6c757d;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        th {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 13px;
+        }
+        tr:hover {
+            background-color: #f1f3f4;
+        }
+        .pk {
+            background-color: #fff3cd;
+            font-weight: bold;
+        }
+        .fk {
+            background-color: #d1ecf1;
+            font-style: italic;
+        }
+        .constraint {
+            font-size: 11px;
+            color: #6c757d;
+            font-style: italic;
+        }
+        .data-type {
+            font-family: 'Courier New', monospace;
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .relations-section {
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 5px solid #28a745;
+        }
+        .relation-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 3px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Diccionario de Datos</h1>
+            <p>Sistema de Gestión Hotelera</p>
+        </div>
+        <div class="content">
+            <!-- Tabla Persona -->
+            <div class="table-section">
+                <h3 class="table-title">👤 PERSONA</h3>
+                <p class="table-description">Información básica de todas las personas en el sistema</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Tipo de Dato</th>
+                            <th>Nulo</th>
+                            <th>Clave</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="pk">
+                            <td>cedula</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK</td>
+                            <td>Número de identificación único de la persona</td>
+                        </tr>
+                        <tr>
+                            <td>nombres</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Nombres de la persona</td>
+                        </tr>
+                        <tr>
+                            <td>apellidos</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Apellidos de la persona</td>
+                        </tr>
+                        <tr>
+                            <td>direccion</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Dirección de residencia</td>
+                        </tr>
+                        <tr>
+                            <td>telefono</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Número telefónico de contacto</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Correo electrónico</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabla Usuario -->
+            <div class="table-section">
+                <h3 class="table-title">🔑 USUARIO</h3>
+                <p class="table-description">Clientes que pueden realizar reservas</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Tipo de Dato</th>
+                            <th>Nulo</th>
+                            <th>Clave</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="pk fk">
+                            <td>cedula</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK/FK</td>
+                            <td>Cédula del usuario (referencia a persona)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabla Empleado -->
+            <div class="table-section">
+                <h3 class="table-title">👨‍💼 EMPLEADO</h3>
+                <p class="table-description">Personal que trabaja en el hotel</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Tipo de Dato</th>
+                            <th>Nulo</th>
+                            <th>Clave</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="pk fk">
+                            <td>cedula</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK/FK</td>
+                            <td>Cédula del empleado (referencia a persona)</td>
+                        </tr>
+                        <tr class="fk">
+                            <td>idCargo</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>SI</td>
+                            <td>FK</td>
+                            <td>Identificador del cargo del empleado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabla Habitacion -->
+            <div class="table-section">
+                <h3 class="table-title">🏨 HABITACION</h3>
+                <p class="table-description">Habitaciones disponibles en el hotel</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Tipo de Dato</th>
+                            <th>Nulo</th>
+                            <th>Clave</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="pk">
+                            <td>noHabitacion</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK</td>
+                            <td>Número único de habitación</td>
+                        </tr>
+                        <tr>
+                            <td>categoria</td>
+                            <td><span class="data-type">varchar(9)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Tipo de habitación<br><span class="constraint">CHECK: 'sencilla', 'doble', 'suite'</span></td>
+                        </tr>
+                        <tr>
+                            <td>precionoche</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Precio por noche de la habitación</td>
+                        </tr>
+                        <tr>
+                            <td>estado</td>
+                            <td><span class="data-type">varchar(14)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Estado actual de la habitación<br><span class="constraint">CHECK: 'disponible', 'no disponible', 'mantenimiento'</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabla Reserva -->
+            <div class="table-section">
+                <h3 class="table-title">📅 RESERVA</h3>
+                <p class="table-description">Reservas realizadas por los usuarios</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Tipo de Dato</th>
+                            <th>Nulo</th>
+                            <th>Clave</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="pk">
+                            <td>idReserva</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK</td>
+                            <td>Identificador único de la reserva</td>
+                        </tr>
+                        <tr>
+                            <td>fechaEntrada</td>
+                            <td><span class="data-type">timestamp with time zone</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Fecha y hora de entrada</td>
+                        </tr>
+                        <tr>
+                            <td>fechaSalida</td>
+                            <td><span class="data-type">timestamp with time zone</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Fecha y hora de salida</td>
+                        </tr>
+                        <tr class="fk">
+                            <td>noHabitacion</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>FK</td>
+                            <td>Número de habitación reservada</td>
+                        </tr>
+                        <tr class="fk">
+                            <td>cedula</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>SI</td>
+                            <td>FK</td>
+                            <td>Cédula del usuario que realiza la reserva</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabla Servicio -->
+            <div class="table-section">
+                <h3 class="table-title">🛎️ SERVICIO</h3>
+                <p class="table-description">Servicios adicionales ofrecidos por el hotel</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Tipo de Dato</th>
+                            <th>Nulo</th>
+                            <th>Clave</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="pk">
+                            <td>idServicio</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK</td>
+                            <td>Identificador único del servicio</td>
+                        </tr>
+                        <tr>
+                            <td>detalles</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Descripción detallada del servicio</td>
+                        </tr>
+                        <tr>
+                            <td>nombre</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Nombre del servicio</td>
+                        </tr>
+                        <tr>
+                            <td>costo</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Costo del servicio</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabla Consume -->
+            <div class="table-section">
+                <h3 class="table-title">🍽️ CONSUME</h3>
+                <p class="table-description">Registro de servicios consumidos por reserva</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Tipo de Dato</th>
+                            <th>Nulo</th>
+                            <th>Clave</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>fecha</td>
+                            <td><span class="data-type">timestamp with time zone</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Fecha y hora del consumo</td>
+                        </tr>
+                        <tr class="pk fk">
+                            <td>idReserva</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK/FK</td>
+                            <td>Identificador de la reserva</td>
+                        </tr>
+                        <tr class="pk fk">
+                            <td>idServicio</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK/FK</td>
+                            <td>Identificador del servicio consumido</td>
+                        </tr>
+                        <tr class="pk">
+                            <td>idConsumo</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK</td>
+                            <td>Identificador único del consumo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabla Cargo -->
+            <div class="table-section">
+                <h3 class="table-title">💼 CARGO</h3>
+                <p class="table-description">Cargos disponibles para empleados</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Tipo de Dato</th>
+                            <th>Nulo</th>
+                            <th>Clave</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="pk">
+                            <td>idCargo</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK</td>
+                            <td>Identificador único del cargo</td>
+                        </tr>
+                        <tr>
+                            <td>nombreC</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Nombre del cargo</td>
+                        </tr>
+                        <tr>
+                            <td>descripcionC</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Descripción del cargo</td>
+                        </tr>
+                        <tr class="fk">
+                            <td>idArea</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>SI</td>
+                            <td>FK</td>
+                            <td>Identificador del área del cargo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabla Area -->
+            <div class="table-section">
+                <h3 class="table-title">🏢 AREA</h3>
+                <p class="table-description">Áreas o departamentos del hotel</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campo</th>
+                            <th>Tipo de Dato</th>
+                            <th>Nulo</th>
+                            <th>Clave</th>
+                            <th>Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="pk">
+                            <td>idArea</td>
+                            <td><span class="data-type">numeric(10)</span></td>
+                            <td>NO</td>
+                            <td>PK</td>
+                            <td>Identificador único del área</td>
+                        </tr>
+                        <tr>
+                            <td>nombreA</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Nombre del área</td>
+                        </tr>
+                        <tr>
+                            <td>descripcionA</td>
+                            <td><span class="data-type">varchar(255)</span></td>
+                            <td>SI</td>
+                            <td>-</td>
+                            <td>Descripción del área</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Sección de Relaciones -->
+            <div class="relations-section">
+                <h3 class="table-title">🔗 RELACIONES ENTRE TABLAS</h3>
+                
+                <div class="relation-item">
+                    <strong>USUARIO → PERSONA</strong><br>
+                    usuario.cedula REFERENCES persona.cedula (1:1)
+                </div>
+                
+                <div class="relation-item">
+                    <strong>EMPLEADO → PERSONA</strong><br>
+                    empleado.cedula REFERENCES persona.cedula (1:1)
+                </div>
+                
+                <div class="relation-item">
+                    <strong>EMPLEADO → CARGO</strong><br>
+                    empleado.idCargo REFERENCES cargo.idCargo (N:1)
+                </div>
+                
+                <div class="relation-item">
+                    <strong>CARGO → AREA</strong><br>
+                    cargo.idArea REFERENCES area.idArea (N:1)
+                </div>
+                
+                <div class="relation-item">
+                    <strong>RESERVA → HABITACION</strong><br>
+                    reserva.noHabitacion REFERENCES habitacion.noHabitacion (N:1)
+                </div>
+                
+                <div class="relation-item">
+                    <strong>RESERVA → USUARIO</strong><br>
+                    reserva.cedula REFERENCES usuario.cedula (N:1)
+                </div>
+                
+                <div class="relation-item">
+                    <strong>CONSUME → RESERVA</strong><br>
+                    consume.idReserva REFERENCES reserva.idReserva (N:1)
+                </div>
+                
+                <div class="relation-item">
+                    <strong>CONSUME → SERVICIO</strong><br>
+                    consume.idServicio REFERENCES servicio.idServicio (N:1)
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
