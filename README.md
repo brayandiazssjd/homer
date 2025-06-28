@@ -30,3 +30,13 @@ Homer is a hotel reservation management system
 
 6. Servicio
 - [ ] Consultar todos los servicios
+
+7. Otros
+- [ ] Consultar precio del consumo promedio o acumulado diario, semanal o mensual
+- [ ] Consultar Estadía promedio por temporada (verano, invierno...) o en un rango
+- [ ] Consultar Usuarios promedio por día, mes o año o en un rago
+- [ ] Consultar Servicios más/menos usados
+- [ ] Consultar Habitaciones más reservadas
+- [ ] Consultar Usuarios más fieles/infieles
+- [ ] Consultar Usuarios que más/menos gastan
+- [ ] Consultar Empleados más antiguos
