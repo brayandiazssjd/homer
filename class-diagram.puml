@@ -1,0 +1,72 @@
+@startuml
+
+
+' Defintion
+
+' Models
+class User
+class Consumption
+class Reservation
+class Room
+class Person
+class Employee
+class Service
+class DBConnection
+class Area
+class Position
+
+' DAOs
+class DAO
+class PositionDAO
+class AreaDAO
+class RoomDAO
+class EmployeeDAO
+class UserDAO
+class ConsumptionDAO
+class ReservationDAO
+class ServiceDAO
+
+' Controllers
+class AreaController
+class ServiceController
+class UserController
+class EmployeeController
+
+' Relations
+
+' Generalization
+Person <|-- Employee
+Person <|-- User
+DAO <|-down- AreaDAO
+DAO <|-down- PositionDAO
+DAO <|-down- RoomDAO
+DAO <|-down- EmployeeDAO
+DAO <|-down- ServiceDAO
+DAO <|-down- ReservationDAO
+DAO <|-down- UserDAO
+DAO <|-down- ConsumptionDAO
+
+' Agregation
+Reservation o-- User 
+Reservation o-- Room
+Reservation o-- Consumption
+Consumption  o-- Service
+
+' Dependency
+ConsumptionDAO ..> Consumption
+ServiceDAO ..> Service 
+RoomDAO ..> Room
+EmployeeDAO ..> Employee
+UserDAO ..> User
+Reservation ..> ReservationDAO 
+AreaDAO ..> Area
+PositionDAO ..> Position
+
+' Association
+DAO --> DBConnection
+ServiceController --> Service
+UserController --> User
+AreaController --> Area 
+EmployeeController --> Employee
+
+@enduml
