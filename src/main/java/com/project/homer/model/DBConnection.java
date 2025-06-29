@@ -11,17 +11,17 @@ public final class DBConnection {
     private static Connection instance = null;
 
     private DBConnection() {
-        try {
+        
+    }
+
+    public static Connection getInstance() {
+       try {
             if (instance == null) {
                 instance = DriverManager.getConnection(url, user, password);
             }
         } catch (SQLException sqle) {
             System.out.println(sqle.toString());
-        }
-    }
-
-    public static Connection getInstance() {
-        DBConnection(); 
+        } 
         return instance;
     }
 
