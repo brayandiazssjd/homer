@@ -3,13 +3,12 @@ package com.project.homer.model;
 import lombok.Data;
 
 /**
- * Area
+ * Position
  */
-
 @Data
-public class Area {
-
+public class Position {
     private String name;
     private int id;
     private String description;
+    private Area area;
 }

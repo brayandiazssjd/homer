@@ -20,13 +20,13 @@ public class HomerApplication {
 
 	// New method to handle web requests
     @GetMapping("/") // Maps HTTP GET requests to the root URL ("/")
-    public String hello() {
+    public ArrayList<Object> hello() {
         Area a = new Area("a",1,"a");
-        ArrayList<Area> l = new ArrayList<>();
-        l.add(a);
-
         Service s = new Service();
         s.setName("my service");
-        return a.toString() + " " + s.toString();
+        ArrayList<Object> l = new ArrayList<>();
+        l.add(a);
+        l.add(s);
+        return l;
     }
 }
