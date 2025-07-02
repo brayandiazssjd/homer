@@ -4,6 +4,7 @@
 ' Defintion
 
 ' Models
+
 class User
 class Consumption
 class Reservation
@@ -16,6 +17,7 @@ class Area
 class Position
 
 ' DAOs
+
 class DAO
 class PositionDAO
 class AreaDAO
@@ -27,10 +29,12 @@ class ReservationDAO
 class ServiceDAO
 
 ' Controllers
-class AreaController
-class ServiceController
+
 class UserController
 class EmployeeController
+class ReservationController
+class ServiceController
+class ConsumptionController
 
 ' Relations
 
@@ -68,5 +72,6 @@ ServiceController --> Service
 UserController --> User
 AreaController --> Area 
 EmployeeController --> Employee
+
 
 @enduml
