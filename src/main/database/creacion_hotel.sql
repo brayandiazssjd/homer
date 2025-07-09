@@ -14,7 +14,6 @@ CREATE TABLE usuario(
     cedula numeric(10)
 );
 CREATE TABLE reserva(
-    idReserva numeric(10),
     fechaEntrada timestamp with time zone,
     fechaSalida timestamp with time zone,
     noHabitacion numeric(10) NOT NULL,
@@ -34,9 +33,10 @@ CREATE TABLE servicio(
 );
 CREATE TABLE consume(
     fecha timestamp with time zone,
-    idReserva numeric(10),
-    idServicio numeric(10),
-    idConsumo numeric(10)
+    fechaEntrada timestamp with time zone,
+    noHabitacion numeric(10) NOT NULL,
+    cedula numeric(10),
+    idServicio numeric(10)
 );
 CREATE TABLE empleado(
     cedula numeric(10),
@@ -72,11 +72,15 @@ PRIMARY KEY (noHabitacion);
 
 ALTER TABLE reserva
 ADD CONSTRAINT pkreserva
-PRIMARY KEY (idReserva);
+PRIMARY KEY (cedula,noHabitacion,fechaEntrada);
 
 ALTER TABLE consume
 ADD CONSTRAINT pkconsumo
-PRIMARY KEY (idReserva,idConsumo,idServicio);
+PRIMARY KEY (fecha,
+    fechaEntrada,
+    noHabitacion,
+    cedula,
+    idServicio);
 
 ALTER TABLE servicio
 ADD CONSTRAINT pkservicio
@@ -117,8 +121,8 @@ REFERENCES servicio(idServicio);
 
 ALTER TABLE consume
 ADD CONSTRAINT fkconsumereserva
-FOREIGN KEY (idReserva)
-REFERENCES reserva(idReserva);
+FOREIGN KEY (cedula, noHabitacion, fechaEntrada)
+REFERENCES reserva(cedula, noHabitacion, fechaEntrada);
 
 ALTER TABLE empleado
 ADD CONSTRAINT fkempleadocargo

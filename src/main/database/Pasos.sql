@@ -32,7 +32,7 @@ FROM 'S:/Current/homer/src/main/database/datos/habitacion.csv'
 DELIMITER ',' CSV HEADER;
 
 -- 7. Reserva
-COPY reserva(idReserva,fechaEntrada,fechaSalida,noHabitacion,cedula) 
+COPY reserva(fechaEntrada, fechaSalida, noHabitacion, cedula)
 FROM 'S:/Current/homer/src/main/database/datos/reserva.csv' 
 DELIMITER ',' CSV HEADER;
 
@@ -42,6 +42,6 @@ FROM 'S:/Current/homer/src/main/database/datos/servicio.csv'
 DELIMITER ',' CSV HEADER;
 
 -- 9. Consume
-COPY consume(fecha,idReserva,idServicio,idConsumo)
+COPY consume(fecha, fechaEntrada, noHabitacion, cedula, idServicio)
 FROM 'S:/Current/homer/src/main/database/datos/consume.csv' 
 DELIMITER ',' CSV HEADER;
