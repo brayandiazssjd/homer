@@ -4,7 +4,7 @@
       NOSUPERUSER
       NOCREATEDB
       NOCREATEROLE
-      NOINHERIT
+      INHERIT
       NOREPLICATION;
 -- 2. Asignar el rol recepcionista al usuario
 GRANT recepcionista_1 TO recepcionista;
@@ -27,7 +27,7 @@ CREATE USER masajista WITH
       NOSUPERUSER
       NOCREATEDB
       NOCREATEROLE
-      NOINHERIT
+      INHERIT
       NOREPLICATION;
 
 -- 2. Asignar el rol servicios al usuario masajista
