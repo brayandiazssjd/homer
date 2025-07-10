@@ -13,35 +13,80 @@ import com.project.homer.model.Service;
 /**
  * ServiceDAO
  */
-
 public class ServiceDAO {
-    ArrayList<Service> cached;
-
-    public ArrayList<Service> getFullAll() throws SQLException {
-        String query = "select * from servicio";
-        Connection c = DBConnection.getInstance(DBConnection.ROLE);
+    
+    public ArrayList<Service> getAll() throws SQLException {
+        String query = "SELECT * FROM servicio";
+        Connection c = DBConnection.getInstance();
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(query);
         
-        ArrayList<Service> l = new ArrayList<>();
+        ArrayList<Service> services = new ArrayList<>();
 
         while (rs.next()) {
-            Service s = new Service();
-            s.setName(rs.getString("nombre"));
-            s.setId(rs.getInt("idservicio"));
-            s.setDescription(rs.getString("serdescripcion"));
-            l.add(s);
+            Service service = new Service();
+            service.setId(rs.getInt("idservicio"));
+            service.setName(rs.getString("nombre"));
+            service.setDescription(rs.getString("serdescripcion"));
+            service.setPrice(rs.getFloat("precio"));
+            services.add(service);
         }
-        return l;
+        
+        rs.close();
+        st.close();
+        return services;
+    }
+    
+    public Service getById(int id) throws SQLException {
+        String query = "SELECT * FROM servicio WHERE idservicio = ?";
+        Connection c = DBConnection.getInstance();
+        PreparedStatement ps = c.prepareStatement(query);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        
+        Service service = null;
+        if (rs.next()) {
+            service = new Service();
+            service.setId(rs.getInt("idservicio"));
+            service.setName(rs.getString("nombre"));
+            service.setDescription(rs.getString("serdescripcion"));
+            service.setPrice(rs.getFloat("precio"));
+        }
+        
+        rs.close();
+        ps.close();
+        return service;
+    }
+    
+    public void insert(Service service) throws SQLException {
+        String query = "INSERT INTO servicio (nombre, serdescripcion, precio) VALUES (?, ?, ?)";
+        Connection c = DBConnection.getInstance();
+        PreparedStatement ps = c.prepareStatement(query);
+        ps.setString(1, service.getName());
+        ps.setString(2, service.getDescription());
+        ps.setFloat(3, service.getPrice());
+        ps.executeUpdate();
+        ps.close();
     }
 
-    public void fullUpdate(Service s) throws SQLException {
-        String query = "update servicio set descripcion = ?, id = ?, nombre = ? where id = ?";
-        Connection c = DBConnection.getInstance(DBConnection.ROLE);
+    public void update(Service service) throws SQLException {
+        String query = "UPDATE servicio SET nombre = ?, serdescripcion = ?, precio = ? WHERE idservicio = ?";
+        Connection c = DBConnection.getInstance();
         PreparedStatement ps = c.prepareStatement(query);
-        ps.setString(1, s.getDescription());
-        ps.setInt(2, s.getId());
-        ps.setString(3,s.getName());
+        ps.setString(1, service.getName());
+        ps.setString(2, service.getDescription());
+        ps.setFloat(3, service.getPrice());
+        ps.setInt(4, service.getId());
         ps.executeUpdate();
+        ps.close();
+    }
+    
+    public void delete(int id) throws SQLException {
+        String query = "DELETE FROM servicio WHERE idservicio = ?";
+        Connection c = DBConnection.getInstance();
+        PreparedStatement ps = c.prepareStatement(query);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+        ps.close();
     }
 }
