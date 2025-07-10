@@ -6,7 +6,7 @@ import lombok.Data;
  * Position
  */
 @Data
-public class Position {
+public class Cargo {
     private String name;
     private int id;
     private String description;
