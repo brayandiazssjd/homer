@@ -10,6 +10,6 @@ import lombok.Data;
 
 @Data
 public class Employee extends Person {
-    private Position position;
+    private Cargo cargo;
     private ArrayList<Reservation> reservations;
 }
