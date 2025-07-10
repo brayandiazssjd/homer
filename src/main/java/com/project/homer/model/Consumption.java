@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 public class Consumption {
 
-    private Service service;
+    private String serviceId;
     private Date date;
     private int id;
     private Reservation reservation;

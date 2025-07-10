@@ -19,7 +19,7 @@ public class ServiceDAO {
 
     public ArrayList<Service> getFullAll() throws SQLException {
         String query = "select * from servicio";
-        Connection c = DBConnection.getInstance();
+        Connection c = DBConnection.getInstance(DBConnection.ROLE);
         Statement st = c.createStatement();
         ResultSet rs = st.executeQuery(query);
         
@@ -37,11 +37,11 @@ public class ServiceDAO {
 
     public void fullUpdate(Service s) throws SQLException {
         String query = "update servicio set descripcion = ?, id = ?, nombre = ? where id = ?";
-        Connection c = DBConnection.getInstance();
+        Connection c = DBConnection.getInstance(DBConnection.ROLE);
         PreparedStatement ps = c.prepareStatement(query);
-        ps.setString(s.getDescription());
-        ps.setInt(s.getId());
-        ps.setString(s.getName());
+        ps.setString(1, s.getDescription());
+        ps.setInt(2, s.getId());
+        ps.setString(3,s.getName());
         ps.executeUpdate();
     }
 }

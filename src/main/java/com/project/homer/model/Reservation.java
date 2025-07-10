@@ -14,6 +14,6 @@ public class Reservation {
     private int id;
     private Date entry;
     private Date departure;
-    private Room room;
-    private User user;
+    private String roomId;
+    private String userId;
 }

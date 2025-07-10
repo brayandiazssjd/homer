@@ -72,6 +72,8 @@ ServiceController --> Service
 UserController --> User
 AreaController --> Area 
 EmployeeController --> Employee
+ConsumptionController --> ConsumptionDAO
+ReservationController --> ReservationDAO
 
 
 @enduml
